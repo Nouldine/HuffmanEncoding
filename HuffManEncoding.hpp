@@ -12,6 +12,11 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <fstream>
+#include <experimental/filesystem> 
+
+
+namespace file_sys = std::experimental::filesystem;
+
 
 struct BinaryNode  {
 
