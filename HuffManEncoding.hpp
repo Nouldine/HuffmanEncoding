@@ -36,19 +36,20 @@ class HuffManEncoding {
 		void encode( BinaryNode *, std::unordered_map< char, std::string > &, std::string ); 
 
 		void decode( BinaryNode*, int & , std::string ); 
-		BinaryNode * buildTree( std::string & );
-		void readFile( std::ifstream  & );
-
+		BinaryNode * buildTree( std::unordered_set<char> );
 		int log2( int ); 
 		std::unordered_set<char> getAlphabet( std::string, int ); 
 		bool checker( std::string original_msg, std::string decoded_msg, int );
 		void printStatistics( std::string, int );
 	 	void createEncodingMap( std::string, std::unordered_map< char, std::string > );
 
+		std::string readFile( std::ifstream & );
+
 	private:
 
 		std::priority_queue<BinaryNode*, std::vector<BinaryNode*>, std::greater<BinaryNode*>>  min_heap;
 		std::unordered_map< char, int > frep_map;
+		std::unordered_map< char, std::string > encode_msg_map;
 		int encoding_length = 0;
 
 };

@@ -12,7 +12,6 @@ BinaryNode* HuffManEncoding::BuildBinaryNode( char my_char, int char_freq, Binar
 	my_node->right = right; 
 
 	return my_node;
-
 }
 
 
@@ -52,11 +51,11 @@ void HuffManEncoding::decode( BinaryNode* root, int & index, std::string my_str 
 
 }
 
-BinaryNode * HuffManEncoding::buildTree( std::string & text_to_encode ) { 
+BinaryNode * HuffManEncoding::buildTree( std::unordered_set<char> alphabet ) { 
 	
 	// std::cout << "Calling HuffManEcoding::buildTree( std::string text_to_encode )" << std::endl;
 	
-	for( char content : text_to_encode )
+	for( auto content : alphabet )
 		++frep_map[ content ]; 
 
 	for( auto content : frep_map )
@@ -127,29 +126,33 @@ void  HuffManEncoding::createEncodingMap( std::string my_text, std::unordered_ma
 	 
 	 std::cout <<"Calling HuffManEncdoding::createEncodingMap( std::string my_text, std::unordered_map< char, std::string >, std::string )";
 
-         BinaryNode * node = buildTree( my_text );
+	 std::unordered_set<char> my_alphabet =  getAlphabet( my_text, my_text.length() );
+         BinaryNode * node = buildTree( my_alphabet );
          encode( node, encoding_map, "");
          std::string encoding_result = "";
 
          for( auto content : my_text )
                   encoding_result += encoding_map[ content ];
 
-        std::cout <<"Result: " << encoding_result << std::endl;
-
+        //std::cout <<"Result: " << encoding_result << std::endl;
 	encoding_length = encoding_result.length();
+	std::cout <<"encoding_length: " << encoding_length << std::endl;
+ 		
+	encode_msg_map = encoding_map;
+	
+	/*
 	int index = -1;
-
         std::cout <<"Decoding: " << std::endl;
         while( index < (int)encoding_result.size() - 2 )
                 decode( node, index, encoding_result );
-
+	*/
 }
 
 void HuffManEncoding::printStatistics( std::string my_text, int my_length ) { 
 
 	std::cout <<"Calling HuffManEncoding::printStatistics( std::string my_text, int my_length )" << std::endl; 
 
-	int sigma = ( getAlphabet( my_text, my_length ) ).size();
+	long sigma = ( getAlphabet( my_text, my_length ) ).size();
 
 	std::cout <<"sigma: " << sigma << std::endl;
 	std::cout <<"my_length: " << my_length << std::endl;
@@ -158,17 +161,17 @@ void HuffManEncoding::printStatistics( std::string my_text, int my_length ) {
 	int encoding_length = 0;
 
 	for( int iter = 0; iter < my_length; ++iter ) {
-		encoded_msg += frep_map.find( my_text[ iter ] )->second;
+		
+		if( encode_msg_map.find( my_text[ iter ] ) !=  encode_msg_map.end() ) {
+			encoded_msg += encode_msg_map.find( my_text[ iter ] )->second;
+		}
 	}
 
 	std::cout <<"second length: " << encoded_msg.length() << std::endl;
 
 	int encoded_ascii = my_length * 8; 
-
-	int fixed_len = ( my_length * log2( sigma ) ) + ( sigma  * ( 8 + log2( sigma )));
+	int fixed_len = ( my_length * log2( sigma ) ) + ( sigma * ( 8 + log2( sigma )));
 	
-			//( msgLength * log2( sigma ) + sigma  * ( 8 + log2( sigma )))
-
 	int huffman_encoding = ( encoded_msg.length() + sigma * 8 + encoding_length );	
 	std::cout <<"ASCII encoding needs: " << encoded_ascii << " bits" << std::endl; 
 	std::cout <<"Fixed length encoding bits: " << fixed_len << " bits"<< std::endl;
@@ -176,11 +179,33 @@ void HuffManEncoding::printStatistics( std::string my_text, int my_length ) {
 
 }
 
-/*
-void HuffManEncoding::readFile( std::ifstream & my_file ) { 
+std::string HuffManEncoding::readFile( std::ifstream & my_file ) { 
 	 std::cout <<"Calling HuffManEncoding::readFile( std::ifstream & my_file )" << std::endl;
+	 std::string string_to_encode = ""; 
+	 char my_char;
 
+	 if( my_file.is_open() ) { 
+
+		 std::cout <<"The file is openned " << std::endl; 
+  
+		 //if(  my_file && std::getline( my_file, string_to_encode ) ) {
+			  
+		 //	  std::cout <<"Here " << std::endl;
+		//	  return string_to_encode;
+		 // }
+	 
+		std::getline( my_file, string_to_encode );	 
+
+		while( !my_file.eof() ) { 
+
+			 my_file.get(my_char);
+			 //std::cout <<< my_char << std::endl;
+			 string_to_encode += my_char;
+		}
+
+	 }
+	 
+	 return string_to_encode;
 }
-*/
 
 
