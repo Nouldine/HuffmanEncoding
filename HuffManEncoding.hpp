@@ -23,6 +23,11 @@ struct BinaryNode  {
 	char my_char;
 	int char_freq; 
 
+	~BinaryNode() { 
+
+		delete left; 
+		delete right;
+	}
 };
 
 
@@ -51,7 +56,8 @@ class HuffManEncoding {
 	 	void createEncodingMap( std::string, std::unordered_map< char, std::string > );
 		std::string readFile( std::ifstream & );
 		void printLargeScaleStatistics( std::string, int );
-		
+		 
+		~HuffManEncoding() {}
 	private:
 
 		std::priority_queue< BinaryNode*, std::vector<BinaryNode*>,  compare >  min_heap;
