@@ -242,6 +242,7 @@ std::string HuffManEncoding::readFile( std::ifstream & my_file ) {
 			 string_to_encode += my_char; 
 			 // std::cout <<"Encoding: " << string_to_encode << std::endl;
 		}
+		string_to_encode.pop_back();
 	 }
 	 
 	 return string_to_encode;
