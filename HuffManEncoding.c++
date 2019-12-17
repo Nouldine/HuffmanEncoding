@@ -204,13 +204,13 @@ void HuffManEncoding::printLargeScaleStatistics( std::string my_text, int my_len
 		if( freq_map.find( my_char ) != freq_map.end() and encode_msg_map.find( my_char ) != encode_msg_map.end() ) {
 			
 			int length = encode_msg_map.find( my_char )->second.length();
-			std::cout <<"Encode message length: " <<  length << std::endl;
+			//std::cout <<"Encode message length: " <<  length << std::endl;
 			encoded_msg_length += freq_map.find( my_char )->second * encode_msg_map.find( my_char )->second.length();
 		}
 	}
 	
-	std::cout <<"encoded_msg_length: " << encoded_msg_length << std::endl;
-	std::cout <<"encoding_length: " << encoding_length << std::endl;
+	// std::cout <<"encoded_msg_length: " << encoded_msg_length << std::endl;
+	// std::cout <<"encoding_length: " << encoding_length << std::endl;
 	
 	int ascii_encoding = my_length * 8; 
        	int fixed_encoding = my_length * log2( sigma ) + sigma * ( 8 + log2( sigma )); 
@@ -227,13 +227,13 @@ void HuffManEncoding::printLargeScaleStatistics( std::string my_text, int my_len
 
 std::string HuffManEncoding::readFile( std::ifstream & my_file ) { 
 	 
-	 std::cout <<"Calling HuffManEncoding::readFile( std::ifstream & my_file )" << std::endl;
+	 // std::cout <<"Calling HuffManEncoding::readFile( std::ifstream & my_file )" << std::endl;
 	 std::string string_to_encode = ""; 
 	 char my_char;
 
 	 if( my_file.is_open() ) { 
 
-		std::cout <<"The file is openned " << std::endl; 
+		// std::cout <<"The file is openned " << std::endl; 
 		std::getline( my_file, string_to_encode );	 
 
 		while( !my_file.eof() ) { 
