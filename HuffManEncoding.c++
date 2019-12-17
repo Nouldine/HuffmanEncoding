@@ -236,7 +236,7 @@ std::string HuffManEncoding::readFile( std::ifstream & my_file ) {
 		std::cout <<"The file is openned " << std::endl; 
 		std::getline( my_file, string_to_encode );	 
 
-		while( /* !my_file.eof() && */ my_char != '$' ) { 
+		while( !my_file.eof() ) { 
 
 			 my_file.get(my_char);
 			 string_to_encode += my_char; 
