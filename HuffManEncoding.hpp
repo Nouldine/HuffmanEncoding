@@ -25,6 +25,7 @@ struct BinaryNode  {
 
 };
 
+
 struct compare {
 
 	 bool operator()( BinaryNode * left, BinaryNode * right ) {
@@ -54,6 +55,7 @@ class HuffManEncoding {
 	private:
 
 		std::priority_queue< BinaryNode*, std::vector<BinaryNode*>,  compare >  min_heap;
+		// std::priority_queue< BinaryNode*, std::vector<BinaryNode*>,  std::greater<BinaryNode*> >  min_heap;
 		std::unordered_map< char, int > freq_map;
 		std::unordered_map< char, std::string > encode_msg_map;
 		int encoding_length = 0;

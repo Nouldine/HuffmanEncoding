@@ -14,7 +14,6 @@ BinaryNode* HuffManEncoding::BuildBinaryNode( char my_char, int char_freq, Binar
 
 }
 
-
 void HuffManEncoding::encode( BinaryNode * root, std::unordered_map< char, std::string > & encoding, std::string my_str ) { 
 
 	// std::cout <<"Calling BinaryNode* HuffManEncoding::encode( BinaryNode * root, std::string & my_str )"; 
@@ -29,7 +28,7 @@ void HuffManEncoding::encode( BinaryNode * root, std::unordered_map< char, std::
 }
 
 void HuffManEncoding::decode( BinaryNode* root, int & index, std::string my_str ) { 
-
+	
 	// std::cout <<"Calling HuffManEncoding::decode( BinaryNode* root, int  & index, std::string & my_str )" << std::endl;
 	if( root == nullptr )
 		return;
@@ -51,7 +50,7 @@ BinaryNode * HuffManEncoding::buildTree( std::string my_string ) {
 	
 	// std::cout << "Calling HuffManEcoding::buildTree( std::string text_to_encode )" << std::endl;
 	
-	for( auto content : my_string ) {
+	for( auto content : my_string )
 		++freq_map[ content ]; 
 
 	for( auto content : freq_map )
@@ -89,10 +88,9 @@ int HuffManEncoding::log2( int my_n ) {
 	}
 
 	return count;
-
 }	
 
-std::unordered_set<char> HuffManEncoding::getAlphabet( std::string my_text, int my_length ){ 
+std::unordered_set<char> HuffManEncoding::getAlphabet( std::string my_text, int my_length ) { 
 	
 	//std::cout <<"Calling unordered_set< char >  getAlphabet(std::string  my_text, int my_length ) "<< std::endl;
 	std::unordered_set<char> alphabet; 
@@ -115,7 +113,7 @@ bool HuffManEncoding::checker( std::string original_msg, std::string decoded_msg
 	return true;
 }
 
-void  HuffManEncoding::createEncodingMap( std::string my_text, std::unordered_map<char, std::string > encoding_map ) {
+void HuffManEncoding::createEncodingMap( std::string my_text, std::unordered_map<char, std::string > encoding_map ) {
 	 
 	 std::cout <<"Calling HuffManEncdoding::createEncodingMap( std::string my_text, std::unordered_map< char, std::string >, std::string )";
 	
@@ -224,6 +222,7 @@ void HuffManEncoding::printLargeScaleStatistics( std::string my_text, int my_len
 	std::cout <<"Fixed length encoding bits: " << fixed_encoding << " bits."<< std::endl;
 	std::cout << std::endl;
         std::cout <<"Huffman Encoding: " << huffman_encoding << " bits."<< std::endl;
+
 }	
 
 std::string HuffManEncoding::readFile( std::ifstream & my_file ) { 

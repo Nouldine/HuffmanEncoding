@@ -11,7 +11,8 @@ int main() {
 	 std::string my_test_string;
 	 std::string path = "DataFiles/Test";
 	 std::ifstream my_file;
-
+ 
+	 /*
 	 for( const auto & entry : file_sys::directory_iterator(path) )
 	 {
 		my_file.open( entry.path(), std::ios_base::in );
@@ -27,6 +28,7 @@ int main() {
 		H.printLargeScaleStatistics( my_test_string, my_test_string.length() ); 
 	
 	}
+	*/
 
 	return 0;
 }
