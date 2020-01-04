@@ -36,7 +36,6 @@ void HuffManEncoding::decode( BinaryNode* root, int & index, std::string my_str 
 	if( !root->left && !root->right ) {
 		std::cout << root->my_char;
 		return;
-
 	}
 	
 	if( my_str[ index ] == '0' )
@@ -115,7 +114,7 @@ bool HuffManEncoding::checker( std::string original_msg, std::string decoded_msg
 
 void HuffManEncoding::createEncodingMap( std::string my_text, std::unordered_map<char, std::string > encoding_map ) {
 	 
-	 std::cout <<"Calling HuffManEncdoding::createEncodingMap( std::string my_text, std::unordered_map< char, std::string >, std::string )";
+	 // std::cout <<"Calling HuffManEncdoding::createEncodingMap( std::string my_text, std::unordered_map< char, std::string >, std::string )";
 	
 	 //std::cout <<"my_text: " << my_text << std::endl;
 	 std::unordered_set<char> my_alphabet = getAlphabet( my_text, my_text.length() );
@@ -163,7 +162,6 @@ void HuffManEncoding::printStatistics( std::string my_text, int my_length ) {
 	std::cout <<"Calling HuffManEncoding::printStatistics( std::string my_text, int my_length )" << std::endl; 
 
 	int sigma = ( getAlphabet( my_text, my_length ) ).size();
-
 	std::cout <<"sigma: " << sigma << std::endl;
 	std::cout <<"my_length: " << my_length << std::endl;
 
@@ -221,9 +219,21 @@ void HuffManEncoding::printLargeScaleStatistics( std::string my_text, int my_len
 	std::cout << std::endl;
 	std::cout <<"Fixed length encoding bits: " << fixed_encoding << " bits."<< std::endl;
 	std::cout << std::endl;
-        std::cout <<"Huffman Encoding: " << huffman_encoding << " bits."<< std::endl;
+    std::cout <<"Huffman Encoding: " << huffman_encoding << " bits."<< std::endl;
 
 }	
+
+
+void HuffManEncoding::eraseContainer() { 
+
+	std::cout <<"Calling HuffManEncoding::eraseContaierner()" << std::endl;
+	
+	while(  min_heap.size() > 0 )
+		min_heap.pop(); 
+
+	freq_map.clear();
+	encode_msg_map.clear();
+}
 
 std::string HuffManEncoding::readFile( std::ifstream & my_file ) { 
 	 
@@ -233,16 +243,15 @@ std::string HuffManEncoding::readFile( std::ifstream & my_file ) {
 
 	 if( my_file.is_open() ) { 
 
-		// std::cout <<"The file is openned " << std::endl; 
-		std::getline( my_file, string_to_encode );	 
-
 		while( !my_file.eof() ) { 
 
 			 my_file.get(my_char);
 			 string_to_encode += my_char; 
 			 // std::cout <<"Encoding: " << string_to_encode << std::endl;
 		}
+
 		string_to_encode.pop_back();
+		
 	 }
 	 
 	 return string_to_encode;

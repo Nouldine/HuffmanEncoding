@@ -43,10 +43,8 @@ class HuffManEncoding {
 
 	public: 
 		HuffManEncoding() = default; 
-		
 		BinaryNode* BuildBinaryNode( char, int, BinaryNode*, BinaryNode* ); 
 		void encode( BinaryNode *, std::unordered_map< char, std::string > &, std::string ); 
-
 		void decode( BinaryNode*, int & , std::string ); 
 		int log2( int ); 
 		BinaryNode * buildTree( std::string );
@@ -56,12 +54,12 @@ class HuffManEncoding {
 	 	void createEncodingMap( std::string, std::unordered_map< char, std::string > );
 		std::string readFile( std::ifstream & );
 		void printLargeScaleStatistics( std::string, int );
-		 
-		~HuffManEncoding() {}
-	private:
+		void eraseContainer();
 
+		~HuffManEncoding(){ }
+
+	private:
 		std::priority_queue< BinaryNode*, std::vector<BinaryNode*>,  compare >  min_heap;
-		// std::priority_queue< BinaryNode*, std::vector<BinaryNode*>,  std::greater<BinaryNode*> >  min_heap;
 		std::unordered_map< char, int > freq_map;
 		std::unordered_map< char, std::string > encode_msg_map;
 		int encoding_length = 0;
@@ -69,5 +67,3 @@ class HuffManEncoding {
 };
 
 #endif 
-
-

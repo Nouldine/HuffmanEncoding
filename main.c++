@@ -14,18 +14,20 @@ int main() {
  
 	 for( const auto & entry : file_sys::directory_iterator(path) )
 	 {
-		my_file.open( entry.path(), std::ios_base::in );
-		std::cout <<"File: " << entry.path() << std::endl;
-		 
-		my_test_string = H.readFile( my_file ); 
-	 	std::unordered_map< char, std::string > encoding;
-	 	H.createEncodingMap( my_test_string, encoding );
-	 
-	 	std::cout <<"test length: " << my_test_string.length() << std::endl; 
+		 my_file.open(entry.path(), std::ios_base::in);
+		 std::cout << "File: " << entry.path() << std::endl;
+		 my_test_string = H.readFile(my_file);
 
-	 	// H.printStatistics( my_test_string, my_test_string.length() ); 
-		H.printLargeScaleStatistics( my_test_string, my_test_string.length() ); 
-	
+		 //std::cout <<"Test1" << std::endl;
+		 std::unordered_map<char, std::string> encoding;
+		 H.createEncodingMap(my_test_string, encoding);
+
+		 // std::cout <<"Test length:" << my_test_string.length() << std::endl;
+		 H.printLargeScaleStatistics(my_test_string, my_test_string.length());
+		 H.eraseContainer();
+
+		 my_file.close();
+		 my_test_string = "";
 	}
 
 	return 0;
