@@ -219,7 +219,7 @@ void HuffManEncoding::printLargeScaleStatistics( std::string my_text, int my_len
 	std::cout << std::endl;
 	std::cout <<"Fixed length encoding bits: " << fixed_encoding << " bits."<< std::endl;
 	std::cout << std::endl;
-    std::cout <<"Huffman Encoding: " << huffman_encoding << " bits."<< std::endl;
+    	std::cout <<"Huffman Encoding: " << huffman_encoding << " bits."<< std::endl;
 
 }	
 
